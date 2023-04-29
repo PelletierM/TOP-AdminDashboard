@@ -1,0 +1,40 @@
+:root {
+    /* VARIABLES */
+    --color-font-main : rgb(0, 0, 0);
+}
+
+/* STYLING */
+* {
+    box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    color: var(--color-font-main);
+    margin: 0;
+    pad: 0;
+}
+
+body {
+    height: 100vh;
+    height: 100svh;
+    display: grid;
+    grid-template-columns: min(200px, 20vw) 1fr;
+    grid-template-rows: min(150px, 15vh) 1fr;
+}
+
+.sidebar {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    background-color: blue;
+}
+
+.topbar {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background-color: red;
+}
+
+.main-content {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    background-color: green;
+}
