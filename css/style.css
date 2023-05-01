@@ -1,13 +1,13 @@
 :root {
     /* VARIABLES */
-    --color-font-main : rgb(0, 0, 0);
+    --color-font-main : rgb(255, 255, 255);
 }
 
 /* STYLING */
 * {
     box-sizing: border-box;
     font-family: Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--color-font-main);
     margin: 0;
     pad: 0;
