@@ -1,40 +1,81 @@
 :root {
     --color-font-main : rgb(25, 25, 25);
+    --color-font-main-dimmed: rgb(85, 85, 85);
     --color-font-secondary : rgb(255, 255, 255);
-    --color-accent-main: rgb(79, 100, 111);
-    --color-accent-secondary: rgb(89, 172, 122);
-    --color-background-secondary: rgb(222, 222, 222);
+    --color-accent-main: rgb(20, 35, 54);
+    --color-accent-secondary: rgb(124, 169, 130);
+    --color-background-secondary: rgb(222, 224, 220);
     --color-background-main: rgb(250, 250, 250);
+    --color-hover: rgb(124, 169, 130);
+    --color-shadow: rgba(0, 0, 0, 0.2);
 
     --transition-time-main: 150ms;
+
+    --gap-standard: 0.8rem;
 }
 
-/* 
-STYLING 
-*/
+html {
+    font-size: 16px;
+}
 
 * {
     box-sizing: border-box;
     font-family: Helvetica, sans-serif;
-    font-size: 14px;
     color: inherit;
     margin: 0;
     padding: 0;
 }
 
+h2 {
+    font-size: 1.125em;
+    margin-bottom: calc(0.75 * var(--gap-standard));
+}
+
+h3 {
+    font-size: 1em;
+}
+
+p {
+    font-size: 0.875em;
+}
+
+/* Body */
 body {
-    height: 100vh;
-    height: 100svh;
-    display: grid;
+    min-height: 100vh;
+    min-height: 100svh;
     color: var(--color-font-main);
+    background-color: var(--color-background-secondary);
+    padding: max(1.5rem, calc(calc(100vh - 925px) / 2)) max(1.5rem, calc(calc(100vw - 1400px) / 2));
+    display: flex;
+}
+
+body > div {
+    align-self: center;
+    background-color: var(--color-accent-main);
+    padding: 0.75rem;
+    border-radius: 2rem;
+    box-shadow: 0.5rem 0.5rem 0.75rem var(--color-shadow);
+    display: grid;
     grid-template-columns: clamp(192px, 20vw, 256px) 1fr;
     grid-template-rows: clamp(128px, 10vh, 192px) 1fr;
 }
 
+body > div > *:first-child {
+    border-top-left-radius: 1.25rem;
+    border-bottom-left-radius: 1.25rem;
+}
+
+body > div > *:nth-child(2) {
+    border-top-right-radius: 1.25rem;
+}
+
+body > div > *:last-child {
+    border-bottom-right-radius: 1.25rem;
+}
+
 svg {
-    height: 1.5em;
-    width: 1.5em;
-    flex-shrink: 0;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 /* Sidebar */
@@ -45,7 +86,7 @@ svg {
     color: var(--color-font-secondary);
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: calc(2 * var(--gap-standard));
     padding: 1rem;
 }
 
@@ -60,32 +101,30 @@ a, a:hover {
 }
 
 a:hover {
-    color: var(--color-font-main);
+    color: var(--color-hover);
 }
 
 .sidebar .sidebar-item {
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    gap: calc(0.5 * var(--gap-standard));
     align-items: center;
-
 }
 
 #dashboard, #dashboard * {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 
 /* Topbar */
-
 .topbar {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     background-color: var(--color-background-main);
+    padding: var(--gap-standard) calc(2 * var(--gap-standard));
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 3fr;
-    padding: 1rem 2rem;
 }
 
 .profile-bar {
@@ -98,7 +137,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
+    gap: var(--gap-standard);
     flex-grow: 1;
 }
 
@@ -108,11 +147,11 @@ a:hover {
 
 #search-form > input {
     width: 100%;
-    height: 1.6em;
+    height: 1.6rem;
     border: none;
-    border-radius: 0.8em;
+    border-radius: 0.8rem;
     background-color: var(--color-background-secondary);
-    padding: 0 0.8em;
+    padding: 0 0.8rem;
     transition: var(--transition-time-main);
 }
 
@@ -125,7 +164,7 @@ a:hover {
 .profile-info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--gap-standard);
 }
 
 .menu-bar {
@@ -137,78 +176,185 @@ a:hover {
 
 .welcome {
     display: grid;
-    grid-template-columns: 4em 1fr;
-    grid-template-rows: 2em 2em;
+    grid-template-columns: 3.5rem 1fr;
+    grid-template-rows: 1.75rem 1.75rem;
 }
 
 .welcome > img {
     grid-row: 1 / 3;
     grid-column: 1 / 2;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1.75rem;
     border-width: 2px;
     border-style: solid;
     border-color: var(--color-accent-main);
 }
 
 .welcome p:nth-child(2) {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     align-self: self-end;
-    padding: 0.2rem 1rem;
+    padding: 0 var(--gap-standard);
 }
 
 .welcome p:last-child {
-    font-size: 1.2rem;
+    font-size: 1.125rem;
     font-weight: 600;
     align-self: self-start;
-    padding: 0.2rem 1rem;
+    padding: 0rem var(--gap-standard);
 }
 
 .menu {
     display: flex;
-    gap: 1rem;
+    gap: var(--gap-standard);
 }
 
 .menu button {
     border: none;
-    width: 6rem;
+    width: 5rem;
     height: 2rem;
     background-color: var(--color-accent-main);
     color: var(--color-font-secondary);
     border-radius: 1rem;
+    transition: var(--transition-time-main);
 }
 
+.menu button:hover {
+    background-color: var(--color-hover);
+    transition: var(--transition-time-main);
+}
 
 /* Main content */
-
 .main-content {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     background-color: var(--color-background-secondary);
-
     display: grid;
-    grid-template-columns: 1fr min(20vw, 200px);
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr min(20vw, 240px);
+    padding: calc(2 * var(--gap-standard));
+    gap: var(--gap-standard);
 }
 
 .projects {
     grid-column: 1 / 2;
-    grid-row: 1 / 3;
+    grid-row: 1 / 2;
 }
 
 .project-card-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    gap: var(--gap-standard);
 }
+
+.project-card {
+    min-height: 200px;
+    border-radius: 1rem;
+    border-width: 0;
+    border-left-width: 1rem;
+    border-style: solid;
+    border-color: var(--color-accent-secondary);
+    background-color: var(--color-background-main);
+    padding: var(--gap-standard);
+    box-shadow: 0.25rem 0.25rem 0.25rem var(--color-shadow);
+    transition: var(--transition-time-main);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.5rem 1fr 1.5rem;
+}
+
+.project-card p {
+    color: var(--color-font-main-dimmed);
+}
+
+.card-interaction {
+    justify-self: self-end;
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--gap-standard) / 2);
+}
+
+.card-interaction svg {
+    height: 1.25rem;
+    width: 1.25rem;
+    transition: var(--transition-time-main);
+}
+
+.card-interaction svg:hover {
+    color: var(--color-accent-secondary);
+}
+
+.sidebar-right {
+    display: flex;
+    flex-direction: column;
+    gap: calc(2 * var(--gap-standard));
+}
+
+.announcement-container, .user-container {
+    background-color: var(--color-background-main);
+    padding: var(--gap-standard);
+    border-radius: 1rem;
+    display: grid;
+    box-shadow: 0.25rem 0.25rem 0.25rem var(--color-shadow);
+    transition: var(--transition-time-main);
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(autofit, 1fr);
+    gap: var(--gap-standard);
+}
+
+.announcement-container h3, .user-container h3 {
+    font-size: 0.875rem;
+}
+
+.announcement-container p,
+.user-container p {
+    font-size: 0.8125rem;
+    color: var(--color-font-main-dimmed);
+}
+
+
+.user {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    grid-template-rows: 1.25rem 1.25rem;
+}
+
+.user > img {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+
+.user > p {
+    padding-left: var(--gap-standard);
+}
+
+.user > p:nth-child(2) {
+    color: var(--color-font-main);
+    align-self: self-end;
+    font-weight: 600;
+}
+
+.user > p:last-child {
+    align-self: self-start;
+    color: var(--color-font-main-dimmed);
+}
+
 .user > img, .profile-info > img {
-    width: 3em;
-    height: 3em;
-    border-radius: 1.5em;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
     border-width: 2px;
     border-style: solid;
     border-color: var(--color-accent-main);
+}
+
+
+/* Effects */
+
+.project-card:hover,
+.announcement-container:hover,
+.user-container:hover {
+    background-color: white;
+    box-shadow: 0.25rem 0.25rem 0.25rem 0.10rem var(--color-shadow);
 }
