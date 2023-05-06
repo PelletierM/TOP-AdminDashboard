@@ -1,16 +1,16 @@
 :root {
-    --color-font-main : rgb(25, 25, 25);
+    --color-font-main: rgb(25, 25, 25);
     --color-font-main-dimmed: rgb(85, 85, 85);
-    --color-font-secondary : rgb(255, 255, 255);
-    --color-accent-main: rgb(20, 35, 54);
-    --color-accent-secondary: rgb(124, 169, 130);
-    --color-background-secondary: rgb(222, 224, 220);
-    --color-background-main: rgb(250, 250, 250);
-    --color-hover: rgb(124, 169, 130);
+    --color-font-secondary: rgb(255, 255, 255);
+    --color-accent-main: rgb(76, 39, 85);
+    --color-accent-secondary: rgb(160, 43, 90);
+    --color-background-secondary: rgba(236, 236, 236, 0.9);
+    --color-background-main: rgb(255, 255, 255);
+    --color-background-gradient: linear-gradient(315deg, rgba(80,60,120,1) 0%, rgba(76,39,85,1) 34%, rgba(51,17,34,1) 93%);
+    --color-hover-dark: rgb(160, 43, 90);
+    --color-hover-darker: rgb(99, 19, 51);
     --color-shadow: rgba(0, 0, 0, 0.2);
-
     --transition-time-main: 150ms;
-
     --gap-standard: 0.8rem;
 }
 
@@ -33,10 +33,12 @@ h2 {
 
 h3 {
     font-size: 1em;
+    transition: var(--transition-time-main);
 }
 
 p {
     font-size: 0.875em;
+    transition: var(--transition-time-main);
 }
 
 /* Body */
@@ -51,12 +53,12 @@ body {
 
 body > div {
     align-self: center;
-    background-color: var(--color-accent-main);
+    background: var(--color-background-gradient);
     padding: 0.75rem;
     border-radius: 2rem;
     box-shadow: 0.5rem 0.5rem 0.75rem var(--color-shadow);
     display: grid;
-    grid-template-columns: clamp(192px, 20vw, 256px) 1fr;
+    grid-template-columns: clamp(11rem, 18vw, 14rem) 1fr;
     grid-template-rows: clamp(128px, 10vh, 192px) 1fr;
 }
 
@@ -67,31 +69,34 @@ body > div > *:first-child {
 
 body > div > *:nth-child(2) {
     border-top-right-radius: 1.25rem;
+    border-top-left-radius: 1.25rem;
 }
 
 body > div > *:last-child {
     border-bottom-right-radius: 1.25rem;
+    border-bottom-left-radius: 1.25rem;
 }
 
 svg {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.25rem;
+    width: 1.25rem;
 }
 
 /* Sidebar */
 .sidebar {
     grid-column: 1 / 2;
     grid-row: 1 / 3;
-    background-color: var(--color-accent-main);
+    background-color: transparent;
     color: var(--color-font-secondary);
     display: flex;
     flex-direction: column;
-    gap: calc(2 * var(--gap-standard));
+    gap: calc(3 * var(--gap-standard));
     padding: 1rem;
 }
 
 ul, ol {
     list-style-type: none;
+    z-index: 1;
 }
 
 a, a:hover {
@@ -100,8 +105,44 @@ a, a:hover {
     width: fit-content;
 }
 
-a:hover {
-    color: var(--color-hover);
+li {
+    position: relative;
+    height: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+li::before {
+    content: "";
+    width: 0px;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: calc(0% - 1.75rem);
+    background-color: var(--color-hover-darker);
+    transition: var(--transition-time-main);
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    z-index: -1;
+}
+
+li:hover::before {
+    width: 11rem;
+}
+
+li.current-page::before {
+    content: "";
+    width: 11rem;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: calc(0% - 1.75rem);
+    background-color: var(--color-hover-dark);
+    transition: var(--transition-time-main);
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    z-index: -1;
 }
 
 .sidebar .sidebar-item {
@@ -111,9 +152,14 @@ a:hover {
     align-items: center;
 }
 
-#dashboard, #dashboard * {
+#dashboard {
     font-size: 1.3rem;
     font-weight: 600;
+}
+
+#dashboard svg {
+    width: 2rem;
+    height: 2rem;
 }
 
 /* Topbar */
@@ -155,16 +201,48 @@ a:hover {
     transition: var(--transition-time-main);
 }
 
+#search-form > input:hover {
+    box-shadow: 0px 0px 0px 1px var(--color-accent-main);
+}
+
 #search-form > input:focus {
     outline: none;
-    box-shadow: 0px 0px 0px 1px var(--color-accent-main);
-    transition: var(--transition-time-main);
+    box-shadow: 0px 1px 0px 2px var(--color-accent-main);
 }
 
 .profile-info {
     display: flex;
     align-items: center;
     gap: var(--gap-standard);
+    z-index: 1;
+    position: relative;
+}
+
+.profile-info > a::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: calc(0% - var(--gap-standard));
+    right: calc(0% - calc(2 * var(--gap-standard)));
+    background-color: rgb(68, 38, 76);
+    transition: var(--transition-time-main);
+    border-bottom-left-radius: 1rem;
+    z-index: -1;
+}
+
+.profile-info > a:hover::before {
+    width: 9.5rem;
+    height: calc(var(--gap-standard) + 2.5rem);
+}
+
+.profile-info > a {
+    color: var(--color-accent-main);
+    transition-delay: calc(var(--transition-time-main) / 2);
+}
+
+.profile-info > a:hover {
+    color: var(--color-font-secondary);
 }
 
 .menu-bar {
@@ -186,7 +264,7 @@ a:hover {
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 1.75rem;
-    border-width: 2px;
+    border-width: 3px;
     border-style: solid;
     border-color: var(--color-accent-main);
 }
@@ -221,7 +299,7 @@ a:hover {
 }
 
 .menu button:hover {
-    background-color: var(--color-hover);
+    background-color: var(--color-hover-dark);
     transition: var(--transition-time-main);
 }
 
@@ -268,6 +346,10 @@ a:hover {
     color: var(--color-font-main-dimmed);
 }
 
+.project-card h3:hover {
+    color: var(--color-hover-dark);
+}
+
 .card-interaction {
     justify-self: self-end;
     display: flex;
@@ -281,8 +363,26 @@ a:hover {
     transition: var(--transition-time-main);
 }
 
-.card-interaction svg:hover {
-    color: var(--color-accent-secondary);
+.card-interaction svg.favorite:hover {
+    color: rgb(221, 191, 39);
+}
+
+.card-interaction svg.bookmark:hover {
+    color: rgb(215, 31, 31);
+}
+
+.card-interaction svg.share:hover { 
+    color: rgb(130, 38, 234);
+}
+
+.project-card:hover {
+    transform: translateY(-0.0625rem);
+}
+
+.project-card:hover,
+.announcement-container:hover,
+.user-container:hover {
+    box-shadow: 0.25rem 0.25rem 0.25rem 0.10rem var(--color-shadow);
 }
 
 .sidebar-right {
@@ -303,8 +403,32 @@ a:hover {
     gap: var(--gap-standard);
 }
 
-.announcement-container h3, .user-container h3 {
+.announcement-container {
+    gap: calc(3 * var(--gap-standard));
+}
+
+.announcement {
+    position: relative;
+}
+
+.announcement-container > div:nth-child(n + 2)::before {
+    content: '';
+    position: absolute;
+    align-self: center;
+    width: 70%;
+    height: 1px;
+    background-color: var(--color-font-main-dimmed);
+    z-index: 100;
+    top: calc(0px - calc(var(--gap-standard) * 1.5));
+    left: 15%;
+}
+
+.announcement-container h3 {
     font-size: 0.875rem;
+}
+
+.announcement-container h3:hover {
+    color: var(--color-hover-dark);
 }
 
 .announcement-container p,
@@ -312,7 +436,6 @@ a:hover {
     font-size: 0.8125rem;
     color: var(--color-font-main-dimmed);
 }
-
 
 .user {
     display: grid;
@@ -333,6 +456,11 @@ a:hover {
     color: var(--color-font-main);
     align-self: self-end;
     font-weight: 600;
+    transition: var(--transition-time-main);
+}
+
+.user > p:nth-child(2):hover {
+    color: var(--color-hover-dark);
 }
 
 .user > p:last-child {
@@ -347,14 +475,4 @@ a:hover {
     border-width: 2px;
     border-style: solid;
     border-color: var(--color-accent-main);
-}
-
-
-/* Effects */
-
-.project-card:hover,
-.announcement-container:hover,
-.user-container:hover {
-    background-color: white;
-    box-shadow: 0.25rem 0.25rem 0.25rem 0.10rem var(--color-shadow);
 }
